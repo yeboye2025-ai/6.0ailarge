@@ -568,3 +568,38 @@ const App: React.FC = () => {
 };
 
 export default App;
+async function generateAiComment(
+  content: string,
+  mood: string,
+  lang: string,
+  userName: string,
+  image?: string,
+  fans?: number
+): Promise<string> {
+  try {
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+        mood,
+        lang,
+        userName,
+        image,
+        fans,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("AI 请求失败");
+    }
+
+    const data = await res.json();
+    return data.text || "AI 暂时没有回复";
+  } catch (e) {
+    console.error(e);
+    return "AI 回复暂时不可用";
+  }
+}
