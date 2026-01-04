@@ -6,8 +6,8 @@ import { PostCard } from './components/PostCard';
 import { MoodPicker } from './components/MoodPicker';
 import { MoodChart } from './components/MoodChart';
 import { InsightPanel } from './components/InsightPanel';
-import { DeepChat } from './components/DeepChat';
-import { DecisionHelper } from './components/DecisionHelper';
+import DeepChat from './components/DeepChat';
+import DecisionHelper from './components/DecisionHelper';
 import { locales, Language } from './locales';
 import { 
   Heart, Home, BarChart2, User, Image as ImageIcon, Mic, Shield, Globe, Users, 
