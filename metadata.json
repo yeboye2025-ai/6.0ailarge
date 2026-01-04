@@ -1,0 +1,8 @@
+{
+  "name": "Ai Large - Emotional Social Diary",
+  "description": "A Weibo-style diary app where every thought gets empathetic AI support, mood tracking, and personalized growth insights.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
