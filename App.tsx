@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { DiaryEntry, Mood, InsightData, MoodDataPoint, AiConfig, UserConfig, AiFan, AiStyle, SubscriptionTier, ChatMessage } from './types';
 import { STORAGE_KEY, MOOD_SCORES } from './constants';
@@ -264,7 +263,21 @@ const App: React.FC = () => {
     if ((!content.trim() && !voiceData && !imagePreview) || isPosting || !checkPostLimit()) return;
     setIsPosting(true);
     try {
-      const aiComments = await generateAiComment(content.trim() || "[Media]", selectedMood, lang, userConfig.name, imagePreview || undefined, fans);
+      let aiComments = "";
+try {
+  aiComments = await generateAiComment(
+    content.trim() || "[Media]",
+    selectedMood,
+    lang,
+    userConfig.name,
+    imagePreview || undefined,
+    fans
+  );
+} catch (e) {
+  console.error(e);
+  aiComments = "";
+}
+
       setEntries([{ id: Date.now().toString(), content: content.trim() || (lang === 'zh' ? '心情碎碎念' : 'Mood thoughts'), mood: selectedMood, timestamp: Date.now(), aiComments, deepChat: {}, privacy, imageUrl: imagePreview || undefined, voiceData: voiceData || undefined }, ...entries]);
       setUserConfig(prev => ({ ...prev, dailyPostsCount: prev.dailyPostsCount + 1 }));
       setContent(''); setImagePreview(null); setVoiceData(null); setSelectedMood('😊');
@@ -576,5 +589,8 @@ async function generateAiComment(
   image?: string,
   fans?: number
 ): Promise<string> {
-  return `🤖 AI 回复：我已收到你的内容「${content.slice(0, 20)}…」`;
+  // ⚠️ 这是一个“纯函数”，不碰任何 state
+  return lang === "zh"
+    ? "🤖 AI 回复：我已经看到你的内容了。"
+    : "🤖 AI reply: I’ve seen your post.";
 }
