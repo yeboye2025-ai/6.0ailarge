@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { DiaryEntry, Mood, InsightData, MoodDataPoint, AiConfig, UserConfig, AiFan, AiStyle, SubscriptionTier, ChatMessage } from './types';
 import { STORAGE_KEY, MOOD_SCORES } from './constants';
-import { generateAiComment, generateInsights } from './services/geminiService';
 import { PostCard } from './components/PostCard';
 import { MoodPicker } from './components/MoodPicker';
 import { MoodChart } from './components/MoodChart';
